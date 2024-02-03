@@ -1,10 +1,11 @@
+{% raw %}
 set dotenv-load
 
 _default:
     @just --list
 
 # Watch files and recompile the project on change
-watch: (install watchexec)
+watch: (install "watchexec-cli")
     watchexec --restart --debounce 1000 --watch app --exts rs,toml --clear --quiet -- just build
 
 # Start server
@@ -58,3 +59,5 @@ install tool:
     if ! type "{{tool}}" > /dev/null; then \
         cargo install {{tool}}; \
     fi
+
+{% endraw %}
