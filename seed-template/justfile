@@ -1,0 +1,60 @@
+set dotenv-load
+
+_default:
+    @just --list
+
+# Watch files and recompile the project on change
+watch: (install watchexec)
+    watchexec --restart --debounce 1000 --watch app --exts rs,toml --clear --quiet -- just build
+
+# Start server
+serve: (install "microserver")
+    microserver --port ${PORT:=3000} ./site
+
+# Format, lint with Clippy and run tests
+verify: fmt lint (test "firefox" "headless")
+
+default_target := "dev"
+# Build with wasm-pack
+build target=default_target: (install "wasm-pack")
+    if [ {{target}} = "dev" ]; then \
+        cd ./app; \
+        wasm-pack build --target web --out-dir ../site/pkg --out-name package --dev; \
+        cd ..; \
+    else \
+        cd ./app; \
+        wasm-pack build --target web --out-dir ../site/pkg --out-name package; \
+        cd ..; \
+    fi
+
+# Lint with Clippy
+lint:
+    cargo clippy --all-features -- --deny warnings --deny clippy::pedantic --deny clippy::nursery
+
+# Format with rustfmt
+fmt:
+    cargo +nightly fmt
+
+no_headless := "no_headless"
+# Run tests (env: [chrome, firefox, safari])
+test env headless=no_headless: (install "wasm-pack")
+    if [ {{headless}} = "headless" ]; then \
+        cd ./app; \
+        wasm-pack test --{{env}} --headless; \
+        cd ..; \
+    else \
+        cd ./app; \
+        wasm-pack test --{{env}}; \
+        cd ..; \
+    fi
+
+clean:
+    cargo clean
+    rm -rf ./site/pkg
+
+
+# install cargo tool
+install tool:
+    if ! type "{{tool}}" > /dev/null; then \
+        cargo install {{tool}}; \
+    fi
