@@ -1,0 +1,39 @@
+set dotenv-load
+
+lib_dir := "lib"
+web_dir := "web"
+package_name := "employee_lib"
+
+_default:
+    @just --list
+
+# serve
+serve: build
+    cd ./{{web_dir}}; \
+    yarn install --force; \
+    yarn dev
+    
+
+dev_default := "yes"
+# build application
+build dev=dev_default: (install "wasm-pack")
+    if [ {{dev_default}} = "yes" ]; then \
+        cd ./{{lib_dir}}; \
+        wasm-pack build --target bundler --out-dir pkg --out-name {{package_name}} --dev; \
+        cd ..; \
+    else \
+        cd ./{{lib_dir}}; \
+        wasm-pack build --target bundler --out-dir pkg --out-name {{package_name}}; \
+        cd ..; \
+    fi 
+
+# clean 
+clean: 
+    cargo clean
+    rm -rf ./{{lib_dir}}/pkg
+
+# install tools
+install tool:
+    if ! type "{{tool}}" > /dev/null; then \
+        cargo install {{tool}}; \
+    fi

@@ -1,2 +1,2 @@
 [template]
-sub_templates = ["seed-template"]
+sub_templates = ["seed-template", "sauron-template"]
