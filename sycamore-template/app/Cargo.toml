@@ -1,5 +1,5 @@
 [package]
-name = "app"
+name = "{{project-name | snake_case }}_app"
 version = { workspace = true }
 edition = { workspace = true }
 authors = { workspace = true }

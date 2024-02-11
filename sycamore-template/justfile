@@ -1,6 +1,8 @@
 app_dir := "app"
 web_dir := "www"
+project_name := {{project-name}}
 
+{% raw %}
 _default:
     @just --list
 
@@ -8,9 +10,9 @@ default_dev := "dev"
 build target=default_dev: (install "wasm-pack")
     cd ./{{app_dir}}; \
     if [ {{target}} = "dev"]; then \
-        wasm-pack build --target bundler --out-dir pkg --out-name hello-sycamore --dev; \
+        wasm-pack build --target bundler --out-dir pkg --out-name {{project_name}} --dev; \
     else \
-        wasm-pack build --target bundler --out-dir pkg --out-name hello-sycamore; \
+        wasm-pack build --target bundler --out-dir pkg --out-name {{project_name}}; \
     fi; \
     cd ../
 
@@ -31,3 +33,4 @@ install tool:
     if ! type "{{tool}}" > /dev/null; then \
         cargo install {{tool}}; \
     fi
+{% endraw %}

@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "hello-app": "file:../app/pkg"
+    "{{project-name}}": "file:../app/pkg"
   },
   "devDependencies": {
     "typescript": "^5.2.2",

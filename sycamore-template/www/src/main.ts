@@ -1,5 +1,5 @@
 import './style.css'
 
-import { main } from "hello-app/hello-sycamore"
+import { main } from "{{project-name}}/{{project-name}}"
 
 main()
