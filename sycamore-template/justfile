@@ -1,0 +1,33 @@
+app_dir := "app"
+web_dir := "www"
+
+_default:
+    @just --list
+
+default_dev := "dev"
+build target=default_dev: (install "wasm-pack")
+    cd ./{{app_dir}}; \
+    if [ {{target}} = "dev"]; then \
+        wasm-pack build --target bundler --out-dir pkg --out-name hello-sycamore --dev; \
+    else \
+        wasm-pack build --target bundler --out-dir pkg --out-name hello-sycamore; \
+    fi; \
+    cd ../
+
+serve: (build)
+    cd ./{{web_dir}}; \
+    rm -rf ./node_modules; \
+    yarn install; \
+    yarn dev;
+
+watch: (install "watchexec-cli")
+    watchexec --restart --debounce 5000 --watch ./{{app_dir}} --exts rs,toml --clear --quiet -- just serve
+
+clean:
+    cargo clean
+    rm -rf ./{{app_dir}}/pkg 
+
+install tool:
+    if ! type "{{tool}}" > /dev/null; then \
+        cargo install {{tool}}; \
+    fi
