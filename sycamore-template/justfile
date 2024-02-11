@@ -1,6 +1,6 @@
 app_dir := "app"
 web_dir := "www"
-project_name := {{project-name}}
+project_name := "{{project-name}}""
 
 {% raw %}
 _default:
@@ -14,7 +14,7 @@ build target=default_dev: (install "wasm-pack")
     else \
         wasm-pack build --target bundler --out-dir pkg --out-name {{project_name}}; \
     fi; \
-    cd ../
+    cd ../;
 
 serve: (build)
     cd ./{{web_dir}}; \
