@@ -1,2 +1,7 @@
 [template]
-sub_templates = ["seed-template", "sauron-template", "sycamore-template"]
+sub_templates = [
+    "seed-template",
+    "sauron-template",
+    "sycamore-template",
+    "yew-template",
+]

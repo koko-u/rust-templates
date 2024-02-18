@@ -1,0 +1,37 @@
+app_dir := "app"
+web_dir := "web"
+project_name := "{{project-name}}"
+
+{% raw %}
+_default:
+    @just --list
+
+default_dev := "dev"
+build target=default_dev: (install "wasm-pack")
+    cd ./{{app_dir}}; \
+    if [ "{{target}}" = "dev"]; then \
+        wasm-pack build --target bundler --out-dir pkg --out-name {{project_name}} --dev; \
+    else \
+        wasm-pack build --target bundler --out-dir pkg --out-name {{project_name}}; \
+    fi; \
+    cd ../;
+
+serve: (build)
+    cd ./{{web_dir}}; \
+    yarn upgrade --force; \
+    yarn dev;
+
+watch: (install "cargo-watch")
+    cd ./{{app_dir}}; \
+    cargo watch --ignore pkg --clear --quiet --why --shell "wasm-pack build --target bundler --out-dir pkg --out-name {{project_name}} --dev && cd ../{{web_dir}} && yarn upgrade --force"; \
+    cd ../;
+
+clean:
+    cargo clean
+    rm -rf ./{{app_dir}}/pkg 
+
+install tool:
+    if ! type "{{tool}}" > /dev/null; then \
+        cargo install {{tool}}; \
+    fi
+{% endraw %}
