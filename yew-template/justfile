@@ -9,7 +9,7 @@ _default:
 default_dev := "dev"
 build target=default_dev: (install "wasm-pack")
     cd ./{{app_dir}}; \
-    if [ "{{target}}" = "dev"]; then \
+    if [ "{{target}}" = "dev" ]; then \
         wasm-pack build --target bundler --out-dir pkg --out-name {{project_name}} --dev; \
     else \
         wasm-pack build --target bundler --out-dir pkg --out-name {{project_name}}; \
@@ -17,9 +17,10 @@ build target=default_dev: (install "wasm-pack")
     cd ../;
 
 serve: (build)
-    cd ./{{web_dir}}; \
-    yarn upgrade --force; \
-    yarn dev;
+    cd ./{{web_dir}} && \
+    rm -rf ./node_modules && \
+    yarn && \
+    yarn dev
 
 watch: (install "cargo-watch")
     cd ./{{app_dir}}; \
@@ -29,6 +30,9 @@ watch: (install "cargo-watch")
 clean:
     cargo clean
     rm -rf ./{{app_dir}}/pkg 
+
+fmt:
+    RUSTFMT=yew-fmt cargo +nightly fmt
 
 install tool:
     if ! type "{{tool}}" > /dev/null; then \

@@ -11,12 +11,16 @@ license = { workspace = true }
 crate-type = ["cdylib"]
 
 [dependencies]
-wasm-bindgen = { version = "0.2" }
-yew = { version = "0.21", features = ["csr"] }
 console_error_panic_hook = { version = "0.1" }
 console_log = { version = "1.0", features = ["color"] }
 log = { version = "0.4" }
+stylist = { version = "0.13", features = ["yew_integration", "parser"] }
+wasm-bindgen = { version = "0.2" }
 web-sys = { version = "0.3" }
+yew = { version = "0.21", features = ["csr"] }
+yew-autoprops = { version = "0.4" }
+yew-html-ext = { version = "0.1" }
+yewdux = { version = "0.10" }
 
 [package.metadata.wasm-pack.release]
 wasm-opt = ["-Os"]

@@ -1,5 +1,7 @@
 mod app;
+mod store;
 mod utils;
+mod components;
 
 use app::App;
 use log::Level;
