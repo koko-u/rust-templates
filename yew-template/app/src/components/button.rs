@@ -42,7 +42,7 @@ impl Component for ButtonComponent {
                 true
             }
             Self::Message::Reset => {
-                self.dispatch.set(AppState::default());
+                self.dispatch.set(AppStore::default());
                 true
             }
         }
