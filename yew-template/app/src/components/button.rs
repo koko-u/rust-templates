@@ -22,7 +22,7 @@ pub enum Msg {
 #[derive(Properties, PartialEq)]
 pub struct Props;
 
-impl Component for CounterComponent {
+impl Component for ButtonComponent {
     type Message = Msg;
     type Properties = Props;
 

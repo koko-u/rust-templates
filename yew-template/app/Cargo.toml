@@ -21,6 +21,14 @@ yew = { version = "0.21", features = ["csr"] }
 yew-autoprops = { version = "0.4" }
 yew-html-ext = { version = "0.1" }
 yewdux = { version = "0.10" }
+gloo-net = { version = "0.5", default-features = false, features = [
+    "json",
+    "http",
+] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0" }
+error-stack = { version = "0.4" }
+
 
 [package.metadata.wasm-pack.release]
 wasm-opt = ["-Os"]

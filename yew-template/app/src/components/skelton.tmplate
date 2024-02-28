@@ -1,0 +1,32 @@
+use stylist::Style;
+use yew::classes;
+use yew::Component;
+use yew::Context;
+use yew::Html;
+use yew::Properties;
+use yew_html_ext::html;
+
+pub struct $Tmp {
+    style: Style,
+}
+
+pub enum Msg {}
+
+#[derive(Properties, PartialEq)]
+pub struct Props {}
+
+impl Component for $Tmp {
+    type Message = Msg;
+    type Properties = Props;
+
+    fn create(_ctx: &Context<Self>) -> Self {
+        let style = Style::new(include_str!("$tmp.rs.css")).unwrap();
+        Self { style }
+    }
+
+    fn view(&self, _ctx: &Context<Self>) -> Html {
+        html! {
+            <div class={classes!(self.style.clone())}></div>
+        }
+    }
+}
