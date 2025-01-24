@@ -5,15 +5,16 @@ use actix_web::web;
 use actix_web::App;
 use actix_web::HttpServer;
 use actix_web_httpauth::middleware::HttpAuthentication;
-use natorus_web::app_cors;
-use natorus_web::bearer_validator;
-use natorus_web::errors::AppResult;
-use natorus_web::errors::ToAppResult as _;
-use natorus_web::routes::app_route;
-use natorus_web::AppState;
-use natorus_web::Db;
-use natorus_web::EnvArgs;
-use natorus_web::Jwt;
+
+use {{crate_name}}::app_cors;
+use {{crate_name}}::bearer_validator;
+use {{crate_name}}::errors::AppResult;
+use {{crate_name}}::errors::ToAppResult as _;
+use {{crate_name}}::routes::app_route;
+use {{crate_name}}::AppState;
+use {{crate_name}}::Db;
+use {{crate_name}}::EnvArgs;
+use {{crate_name}}::Jwt;
 
 #[actix_web::main]
 async fn main() -> AppResult<()> {
