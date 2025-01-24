@@ -1,0 +1,66 @@
+[package]
+name = "{{project-name}}"
+version = "0.1.0"
+edition = "2021"
+authors = ["KOZAKI Tsuneaki <kozaki.tsuneaki@gmail.com>"]
+license = "MIT"
+
+[dependencies]
+actix-cors = { version = "0.7.0" }
+actix-files = { version = "0.6.6" }
+actix-http = { version = "3.9.0" }
+actix-identity = { version = "0.8.0" }
+actix-session = { version = "0.10.1", features = [
+    "redis-pool",
+    "redis-session"
+] }
+actix-web = { version = "4.9.0" }
+actix-web-error = { version = "0.2.0" }
+actix-web-httpauth = { version = "0.8.2" }
+actix-web-validation = { version = "0.7.0", features = ["validator"] }
+better_default = { version = "1.0.5" }
+clap = { version = "4.5.26", features = ["derive", "env"] }
+derive_more = { version = "1.0.0", features = [
+    "constructor",
+    "deref",
+    "deref_mut",
+    "display",
+    "error",
+    "from",
+    "from_str",
+    "try_from",
+    "into",
+    "is_variant",
+] }
+env_logger = { version = "0.11.6" }
+error-stack = { version = "0.5.0", features = ["serde"] }
+jsonwebtoken = { version = "9.3.0" }
+log = { version = "0.4.25" }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = { version = "1.0" }
+sqlx = { version = "0.8.3", features = [
+    "postgres",
+    "runtime-tokio",
+    "time",
+    "uuid"
+] }
+time = { version = "0.3.37", features = [
+    "formatting",
+    "local-offset",
+    "macros",
+    "parsing",
+    "serde",
+    "serde-human-readable",
+    "serde-well-known"
+] }
+url = { version = "2.5.4", features = ["serde"] }
+uuid = { version = "1.12.0", features = [
+    "fast-rng",
+    "serde",
+    "v4"
+] }
+validator = { version = "0.20.0", features = ["derive"] }
+argon2 = { version = "0.5.3", features = ["rand", "password-hash"] }
+password-hash = { version = "0.5.0", features = ["rand_core", "getrandom"] }
+better_default = { workspace = true }
+type-utilities-rs = { version = "0.1.0" }

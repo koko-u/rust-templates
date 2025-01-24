@@ -4,4 +4,5 @@ sub_templates = [
     "sauron-template",
     "sycamore-template",
     "yew-template",
+    "actix-web-template",
 ]
